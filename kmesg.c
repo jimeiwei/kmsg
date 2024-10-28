@@ -40,6 +40,7 @@ int main() {
         for (int i = 0; i < n; i++) {
             if (events[i].events & EPOLLIN) {
                 char log_buffer[BUFFER_SIZE];
+                // 如果printk的长度太长，而log_buffer空间太小，read /dev/kmsg下，返回-1，提示 Invaild argument
                 int bytes = read(kmsg_fd, log_buffer, sizeof(log_buffer) - 1);
                 printf("Log: %d\n", bytes);  // 打印日志
 
